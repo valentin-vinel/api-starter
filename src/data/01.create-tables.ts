@@ -1,5 +1,5 @@
 import { sequelize } from "../config/sequelize.js";
-import "../app/models/app-user.js"
+import "../app/models/app-user.model.js"
 
 (async () => {
 	try {

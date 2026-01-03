@@ -1,4 +1,4 @@
-import { AppUser } from "../app/models/app-user.js";
+import { AppUser } from "../app/models/app-user.model.js";
 import bcrypt from "bcrypt";
 import { sequelize } from "../config/sequelize.js";
 
