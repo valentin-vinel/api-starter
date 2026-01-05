@@ -38,5 +38,13 @@ AppUser.init(
 		sequelize,
 		tableName: "app_user",
 		schema: "public",
+		defaultScope: {
+			attributes: { exclude: ['password'] },
+		},
+		scopes: {
+			withPassword: {
+				attributes: { include: ['password'] },
+			},
+		}
 	},
 );
