@@ -1,0 +1,5 @@
+### 
+# GET /ressources
+GET http://localhost:3000/ressources
+Content-Type: application/json
+###
