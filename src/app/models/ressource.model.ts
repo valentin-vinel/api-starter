@@ -6,6 +6,7 @@ export class Ressource extends Model<RessourceAttributes, RessourceCreationAttri
     declare id: number;
     declare title: string;
     declare description: string;
+    declare id_app_user: number;
 
     declare readonly createdAt: Date;
     declare readonly updatedAt: Date;
@@ -20,6 +21,10 @@ Ressource.init(
         },
         description: {
             type: DataTypes.TEXT,
+            allowNull: false,
+        },
+        id_app_user: {
+            type: DataTypes.INTEGER,
             allowNull: false,
         }
     },
