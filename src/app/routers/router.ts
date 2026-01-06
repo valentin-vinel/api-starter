@@ -8,3 +8,4 @@ router.get('/users', appUserController.listUsers);
 router.get('/users/:id', appUserController.getOneUser);
 
 router.get('/ressources', ressourceController.listRessources)
+router.get('/ressources/:id', ressourceController.getOneRessource)
