@@ -9,3 +9,15 @@ Content-Type: application/json
 GET http://localhost:3000/ressources/3
 Content-Type: application/json
 ###
+
+### 
+# POST /ressources
+POST http://localhost:3000/ressources
+Content-Type: application/json
+
+{
+    "title": "Nouvelle ressource",
+    "description": "Description de la nouvelle ressource",
+    "id_app_user": 1
+}
+###
