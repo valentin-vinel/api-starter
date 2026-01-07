@@ -32,3 +32,8 @@ Content-Type: application/json
     "description": "Nouvelle description de la nouvelle ressource"
 }
 ###
+
+###
+# DELETE /ressources/:id
+DELETE http://localhost:3000/ressources/7
+###
