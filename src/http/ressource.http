@@ -21,3 +21,14 @@ Content-Type: application/json
     "id_app_user": 1
 }
 ###
+
+### 
+# PATCH /ressources/:id
+PATCH http://localhost:3000/ressources/7
+Content-Type: application/json
+
+{
+    "title": "Nouveau titre de la nouvelle ressource",
+    "description": "Nouvelle description de la nouvelle ressource"
+}
+###
