@@ -75,3 +75,22 @@ export async function updateOneRessourceById(req: Request, res: Response) {
     res.status(500).json({ error: "Failed to update ressource."})
   }
 }
+
+// Endpoint: Delete one ressource by id
+export async function deleteOneRessourceById(req: Request, res: Response) {
+  try {
+    const { id } = idSchema.parse(req.params);
+    const ressource = await Ressource.findByPk(id);
+
+    if (!ressource) {
+      return res.status(404).json({ message: "Ressource not found" });
+    }
+
+    await ressource.destroy();
+
+    res.status(204).send();
+  } catch (error) {
+    console.error("Error while deleting ressource : ", error)
+    res.status(500).json({ error: "Failed to delete ressource."})
+  }
+}
