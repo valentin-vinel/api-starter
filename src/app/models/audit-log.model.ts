@@ -2,7 +2,7 @@ import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../../config/sequelize.js";
 import { AuditLogAttributes, AuditLogCreationAttributes } from "../@types/AuditLog.interface.js";
 
-export class AuditLogs extends Model<AuditLogAttributes, AuditLogCreationAttributes> implements AuditLogAttributes {
+export class AuditLog extends Model<AuditLogAttributes, AuditLogCreationAttributes> implements AuditLogAttributes {
     declare id: number;
     declare action: string;
     declare entity: 'project' | 'task';
@@ -13,7 +13,7 @@ export class AuditLogs extends Model<AuditLogAttributes, AuditLogCreationAttribu
     declare readonly updatedAt: Date;
 }
 
-AuditLogs.init(
+AuditLog.init(
     {
         action: {
             type: DataTypes.TEXT,
