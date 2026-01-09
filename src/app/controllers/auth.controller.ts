@@ -6,6 +6,28 @@ import { loginSchema } from "../schemas/login.schema.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+export async function register(req: Request, res: Response) {
+    try {
+        const { username, email, password } = appUserSchema.parse(req.body);
+        
+        const existingAppUser = await AppUser.scope("withPassword").findOne({
+            where: { email }
+        });
+        if (existingAppUser) {
+            return res.status(400).json({ error: "Email déjà utilisé"});
+        }
+
+        const password_hash = await bcrypt.hash(password, 10);
+
+        await AppUser.create({ username, email, password: password_hash });
+
+        res.status(201).json({ message: "Compte utilisateur crée" });
+    } catch (error) {
+        console.error("Register error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+}
+
 export async function login(req: Request, res: Response) {
 	try {
 		const { email, password } = loginSchema.parse(req.body);
