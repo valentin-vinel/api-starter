@@ -8,11 +8,11 @@ export const router = Router();
 router.get('/users', appUserController.listUsers);
 router.get('/users/:id', appUserController.getOneUser);
 
-router.get('/ressources', projectController.listProjects);
-router.get('/ressources/:id', projectController.getOneProject);
-router.post('/ressources', projectController.createOneProject);
-router.patch('/ressources/:id', projectController.updateOneProjectById);
-router.delete('/ressources/:id', projectController.deleteOneProjectById);
+router.get('/projects', projectController.listProjects);
+router.get('/projects/:id', projectController.getOneProject);
+router.post('/projects', projectController.createOneProject);
+router.patch('/projects/:id', projectController.updateOneProjectById);
+router.delete('/projects/:id', projectController.deleteOneProjectById);
 
 router.post('/login', authController.login);
 router.post('/register', authController.register)
