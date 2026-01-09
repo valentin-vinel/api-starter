@@ -4,7 +4,7 @@ export interface ProjectAttributes {
   id?: number;
   name: string;
   description: string;
-  owner_id?: number;
+  owner_id: number;
   is_active: boolean;
   createdAt?: Date;
   updatedAt?: Date;

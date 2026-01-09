@@ -3,6 +3,9 @@ import bcrypt from "bcrypt";
 import { sequelize } from "../config/sequelize.js";
 import { Project } from "../app/models/project.model.js";
 import { AppUserAttributes } from "../app/@types/AppUser.interface.js";
+import { TaskAttributes } from "../app/@types/Task.interface.js";
+import { ProjectAttributes } from "../app/@types/Project.interface.js";
+import { Task } from "../app/models/task.model.js";
 
 console.log("🌱 Seeding tables");
 
@@ -37,7 +40,7 @@ for (const appUser of appUsers) {
 
 // Project
 console.log("🚧 Seeding project data");
-const projects = [
+const projects: ProjectAttributes[] = [
     { name: 'Projet 1', 
       description: "Description du premier projet.",
       owner_id: 1,
@@ -65,6 +68,40 @@ for (const project of projects) {
     })
   } catch (error) {
     console.log("Error with project:", project.name);
+		console.error(error);
+  }
+}
+
+// Task
+console.log("🚧 Seeding task data");
+const tasks: TaskAttributes[] = [
+    { title: 'Tâche 1', 
+      description: "Description de la première tâche.",
+      status: "todo",
+      project_id: 2,
+    },
+    { title: 'Tâche 2', 
+      description: "Description de la seconde tâche.",
+      status: "in_progress",
+      project_id: 3,
+    },
+    { title: 'Tâche 3', 
+      description: "Description de la troisième tâche.",
+      status: "done",
+      project_id: 1,
+    },
+]
+
+for (const task of tasks) {
+  try {
+    await Task.create({
+      title: task.title,
+      description: task.description,
+      status: task.status,
+      project_id: task.project_id
+    })
+  } catch (error) {
+    console.log("Error with task:", task.title);
 		console.error(error);
   }
 }

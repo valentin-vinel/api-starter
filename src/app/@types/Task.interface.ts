@@ -5,7 +5,7 @@ export interface TaskAttributes {
   title: string;
   description: string;
   status: 'todo' | 'in_progress' | 'done';
-  project_id?: number;
+  project_id: number;
   createdAt?: Date;
   updatedAt?: Date;
 }
