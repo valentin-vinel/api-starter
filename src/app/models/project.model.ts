@@ -1,20 +1,21 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../../config/sequelize.js";
-import { RessourceAttributes, RessourceCreationAttributes } from "../@types/Ressource.interface.js";
+import { ProjectAttributes, ProjectCreationAttributes } from "../@types/Project.interface.js";
 
-export class Ressource extends Model<RessourceAttributes, RessourceCreationAttributes> implements RessourceAttributes {
+export class Project extends Model<ProjectAttributes, ProjectCreationAttributes> implements ProjectAttributes {
     declare id: number;
-    declare title: string;
+    declare name: string;
     declare description: string;
-    declare id_app_user: number;
+    declare owner_id: number;
+    declare is_active: boolean;
 
     declare readonly createdAt: Date;
     declare readonly updatedAt: Date;
 }
 
-Ressource.init(
+Project.init(
     {
-        title: {
+        name: {
             type: DataTypes.TEXT,
             allowNull: false,
             unique: true,
@@ -23,14 +24,18 @@ Ressource.init(
             type: DataTypes.TEXT,
             allowNull: false,
         },
-        id_app_user: {
+        owner_id: {
             type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        is_active: {
+            type: DataTypes.BOOLEAN,
             allowNull: false,
         }
     },
     {
 		sequelize,
-		tableName: "ressource",
+		tableName: "project",
 		schema: "public",
 	},
 )

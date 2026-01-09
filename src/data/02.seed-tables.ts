@@ -1,7 +1,7 @@
 import { AppUser } from "../app/models/app-user.model.js";
 import bcrypt from "bcrypt";
 import { sequelize } from "../config/sequelize.js";
-import { Ressource } from "../app/models/ressource.model.js";
+import { Ressource } from "../app/models/project.model.js";
 
 console.log("🌱 Seeding tables");
 

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Ressource } from "../models/ressource.model.js";
+import { Ressource } from "../models/project.model.js";
 import { idSchema } from "../schemas/id.schema.js";
 import { ressourceSchema, updateRessourceSchema } from "../schemas/ressource.schema.js";
 

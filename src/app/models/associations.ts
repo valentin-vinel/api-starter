@@ -1,15 +1,15 @@
 import { AppUser } from "./app-user.model.js";
-import { Ressource } from "./ressource.model.js";
+import { Project } from "./project.model.js";
 import { sequelize } from "../../config/sequelize.js";
 
-AppUser.hasMany(Ressource, {
+AppUser.hasMany(Project, {
     foreignKey: {
         name:"id_app_user",
         allowNull: false,
     },
     as: "ressources"
 });
-Ressource.belongsTo(AppUser, {
+Project.belongsTo(AppUser, {
     foreignKey: {
         name: "id_app_user",
         allowNull: false,
@@ -17,4 +17,4 @@ Ressource.belongsTo(AppUser, {
     as: "appUser"
 });
 
-export { AppUser, Ressource, sequelize }
+export { AppUser, Project, sequelize }
