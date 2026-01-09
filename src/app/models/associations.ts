@@ -11,10 +11,10 @@ AppUser.hasMany(Project, {
 });
 Project.belongsTo(AppUser, {
     foreignKey: {
-        name: "id_app_user",
+        name: "owner_id",
         allowNull: false,
     },
-    as: "appUser"
+    as: "owner"
 });
 
 export { AppUser, Project, sequelize }

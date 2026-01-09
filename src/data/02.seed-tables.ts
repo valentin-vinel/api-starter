@@ -1,7 +1,7 @@
 import { AppUser } from "../app/models/app-user.model.js";
 import bcrypt from "bcrypt";
 import { sequelize } from "../config/sequelize.js";
-import { Ressource } from "../app/models/project.model.js";
+import { Project } from "../app/models/project.model.js";
 
 console.log("🌱 Seeding tables");
 
@@ -33,32 +33,36 @@ for (const appUser of appUsers) {
   }
 }
 
-// Ressource
-console.log("🚧 Seeding ressource data");
-const ressources = [
-    { title: 'Ressource 1', 
-      description: "Description de la première ressource.",
-      id_app_user: 1
+// Project
+console.log("🚧 Seeding project data");
+const projects = [
+    { name: 'Projet 1', 
+      description: "Description du premier projet.",
+      owner_id: 1,
+      is_active: true,
     },
-    { title: 'Ressource 2', 
-      description: "Description de la seconde ressource.",
-      id_app_user: 1
+    { name: 'Projet 2', 
+      description: "Description du second projet.",
+      owner_id: 1,
+      is_active: true,
     },
-    { title: 'Ressource 3',
-      description: "Description de la troisième ressource.",
-      id_app_user: 1
+    { name: 'Projet 3',
+      description: "Description du troisième projet.",
+      owner_id: 1,
+      is_active: true,
     },
 ]
 
-for (const ressource of ressources) {
+for (const project of projects) {
   try {
-    await Ressource.create({
-      title: ressource.title,
-      description: ressource.description,
-      id_app_user: ressource.id_app_user,
+    await Project.create({
+      name: project.name,
+      description: project.description,
+      owner_id: project.owner_id,
+      is_active: project.is_active
     })
   } catch (error) {
-    console.log("Error with ressource:", ressource.title);
+    console.log("Error with project:", project.name);
 		console.error(error);
   }
 }
