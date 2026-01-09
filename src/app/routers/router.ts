@@ -15,3 +15,4 @@ router.patch('/ressources/:id', ressourceController.updateOneRessourceById);
 router.delete('/ressources/:id', ressourceController.deleteOneRessourceById);
 
 router.post('/login', authController.login);
+router.post('/register', authController.register)
