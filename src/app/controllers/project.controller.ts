@@ -6,7 +6,9 @@ import { projectSchema, updateProjectSchema } from "../schemas/project.schema.js
 // Endpoint: Get all projects
 export const listProjects = async(req: Request, res: Response) => {
     try {
-        const projects = await Project.findAll()
+        const projects = await Project.findAll({
+          include: [ { association: "tasks" } ],
+        })
 
         res.status(200).json(projects);
     } catch (error) {
