@@ -8,7 +8,7 @@ export class AppUser extends Model<AppUserAttributes, AppUserCreationAttributes>
   declare email: string;
   declare password: string;
   declare role: 'admin' | 'user';
-  declare is_active: boolean;
+  declare is_active: boolean | null;
 
   declare readonly createdAt: Date;
   declare readonly updatedAt: Date;

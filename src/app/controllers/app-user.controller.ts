@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { AppUser } from "../models/app-user.model.js";
+import { AppUser } from "../models/associations.js";
 import { idSchema } from "../schemas/id.schema.js";
 
 // Endpoint: Get all app-users

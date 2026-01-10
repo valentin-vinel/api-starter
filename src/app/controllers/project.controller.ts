@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Project } from "../models/project.model.js";
+import { Project } from "../models/associations.js";
 import { idSchema } from "../schemas/id.schema.js";
 import { projectSchema, updateProjectSchema } from "../schemas/project.schema.js";
 
