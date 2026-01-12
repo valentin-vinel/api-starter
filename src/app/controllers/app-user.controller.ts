@@ -1,11 +1,13 @@
 import { Request, Response } from "express";
-import { AppUser } from "../models/app-user.model.js";
+import { AppUser } from "../models/associations.js";
 import { idSchema } from "../schemas/id.schema.js";
 
 // Endpoint: Get all app-users
 export const listUsers = async(req: Request, res: Response) => {
     try {
-        const users = await AppUser.findAll()
+        const users = await AppUser.findAll({
+            include: [ { association: 'projects' }]
+        })
 
         res.status(200).json(users);
     } catch (error) {
