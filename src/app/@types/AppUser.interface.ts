@@ -5,7 +5,8 @@ export interface AppUserAttributes {
   username: string;
   email: string;
   password: string;
-  role: string;
+  role: 'admin' | 'user';
+  is_active: boolean | null;
   createdAt?: Date;
   updatedAt?: Date;
 }

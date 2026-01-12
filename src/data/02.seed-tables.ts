@@ -1,15 +1,19 @@
 import { AppUser } from "../app/models/app-user.model.js";
 import bcrypt from "bcrypt";
 import { sequelize } from "../config/sequelize.js";
-import { Ressource } from "../app/models/ressource.model.js";
+import { Project } from "../app/models/project.model.js";
+import { AppUserAttributes } from "../app/@types/AppUser.interface.js";
+import { TaskAttributes } from "../app/@types/Task.interface.js";
+import { ProjectAttributes } from "../app/@types/Project.interface.js";
+import { Task } from "../app/models/task.model.js";
 
 console.log("🌱 Seeding tables");
 
 // AppUser
 console.log("🚧 Seeding app_user data");
-const appUsers = [
-    { username: 'admin', email: "admin@api-starter.dev", password: "password123", role: "admin"},
-    { username: 'john-doe', email: "john-doe@api-starter.dev", password: "password123", role: "user"}
+const appUsers: AppUserAttributes[] = [
+    { username: 'admin', email: "admin@api-starter.dev", password: "password123", role: "admin", is_active: true},
+    { username: 'john-doe', email: "john-doe@api-starter.dev", password: "password123", role: "user", is_active: true}
 ];
 
 let adminUser = null;
@@ -22,6 +26,7 @@ for (const appUser of appUsers) {
       email: appUser.email,
       password: password_hash,
       role: appUser.role,
+      is_active: appUser.is_active
     })
 
     if (appUser.email === "admin@api-starter.dev") {
@@ -33,32 +38,70 @@ for (const appUser of appUsers) {
   }
 }
 
-// Ressource
-console.log("🚧 Seeding ressource data");
-const ressources = [
-    { title: 'Ressource 1', 
-      description: "Description de la première ressource.",
-      id_app_user: 1
+// Project
+console.log("🚧 Seeding project data");
+const projects: ProjectAttributes[] = [
+    { name: 'Projet 1', 
+      description: "Description du premier projet.",
+      owner_id: 1,
+      is_active: true,
     },
-    { title: 'Ressource 2', 
-      description: "Description de la seconde ressource.",
-      id_app_user: 1
+    { name: 'Projet 2', 
+      description: "Description du second projet.",
+      owner_id: 1,
+      is_active: true,
     },
-    { title: 'Ressource 3',
-      description: "Description de la troisième ressource.",
-      id_app_user: 1
+    { name: 'Projet 3',
+      description: "Description du troisième projet.",
+      owner_id: 1,
+      is_active: true,
     },
 ]
 
-for (const ressource of ressources) {
+for (const project of projects) {
   try {
-    await Ressource.create({
-      title: ressource.title,
-      description: ressource.description,
-      id_app_user: ressource.id_app_user,
+    await Project.create({
+      name: project.name,
+      description: project.description,
+      owner_id: project.owner_id,
+      is_active: project.is_active
     })
   } catch (error) {
-    console.log("Error with ressource:", ressource.title);
+    console.log("Error with project:", project.name);
+		console.error(error);
+  }
+}
+
+// Task
+console.log("🚧 Seeding task data");
+const tasks: TaskAttributes[] = [
+    { title: 'Tâche 1', 
+      description: "Description de la première tâche.",
+      status: "todo",
+      project_id: 2,
+    },
+    { title: 'Tâche 2', 
+      description: "Description de la seconde tâche.",
+      status: "in_progress",
+      project_id: 3,
+    },
+    { title: 'Tâche 3', 
+      description: "Description de la troisième tâche.",
+      status: "done",
+      project_id: 1,
+    },
+]
+
+for (const task of tasks) {
+  try {
+    await Task.create({
+      title: task.title,
+      description: task.description,
+      status: task.status,
+      project_id: task.project_id
+    })
+  } catch (error) {
+    console.log("Error with task:", task.title);
 		console.error(error);
   }
 }
