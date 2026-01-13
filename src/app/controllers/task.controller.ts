@@ -27,7 +27,14 @@ export const getOneTask = async(req: Request, res: Response) => {
     try {
         const { id } = idSchema.parse(req.params);
 
-        const task = await Task.findByPk(id);
+        const task = await Task.findByPk(id, {
+            include: [
+                { 
+                    association: "projet",
+                    attributes: ["id", "name", "description"],
+                },
+            ],
+        });
 
         if (!task) {
             return res.status(404).json({ message: "Task not found" });
