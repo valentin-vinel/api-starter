@@ -6,7 +6,14 @@ import { taskSchema, updateTaskSchema } from "../schemas/task.schema.js";
 // Endpoint: Get all tasks
 export const listTasks = async(req: Request, res: Response) => {
     try {
-        const tasks = await Task.findAll()
+        const tasks = await Task.findAll({
+            include: [
+                { 
+                    association: "projet",
+                    attributes: ["id", "name", "description"],
+                },
+            ],
+        });
 
         res.status(200).json(tasks);
     } catch (error) {
