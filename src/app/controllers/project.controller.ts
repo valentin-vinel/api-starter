@@ -7,8 +7,17 @@ import { projectSchema, updateProjectSchema } from "../schemas/project.schema.js
 export const listProjects = async(req: Request, res: Response) => {
     try {
         const projects = await Project.findAll({
-          include: [ { association: "tasks" } ],
-        })
+          include: [ 
+            { association: "tasks",
+              attributes: ["id", "title", "description", "status"],
+              required: false,
+            },
+            { 
+              association: "owner",
+              attributes: ["id", "username"],
+            },
+          ],
+        });
 
         res.status(200).json(projects);
     } catch (error) {
@@ -22,7 +31,18 @@ export const getOneProject = async(req: Request, res: Response) => {
     try {
         const { id } = idSchema.parse(req.params);
 
-        const project = await Project.findByPk(id);
+        const project = await Project.findByPk(id, {
+          include: [ 
+            { association: "tasks",
+              attributes: ["id", "title", "description", "status"],
+              required: false,
+            },
+            { 
+              association: "owner",
+              attributes: ["id", "username"],
+            },
+          ],
+        });
 
         if (!project) {
             return res.status(404).json({ message: "Project not found" });
