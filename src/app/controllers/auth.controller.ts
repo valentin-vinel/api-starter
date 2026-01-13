@@ -59,3 +59,18 @@ export async function login(req: Request, res: Response) {
 		res.status(500).json({ error: "Internal server error" });
 	}
 }
+
+export async function logout(req: Request, res: Response) {
+	try {
+		res.clearCookie('token', {
+			httpOnly: true,
+			secure: false,
+			// sameSite: 'none'
+		});
+
+		res.json({ message: 'Déconnexion réussie' });
+	} catch (error) {
+		console.error("Logout error:", error);
+		res.status(500).json({ error: "Internal server error" });
+	}
+}

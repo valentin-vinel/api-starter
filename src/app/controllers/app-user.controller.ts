@@ -21,7 +21,9 @@ export const getOneUser = async(req: Request, res: Response) => {
     try {
         const { id } = idSchema.parse(req.params);
 
-        const user = await AppUser.findByPk(id);
+        const user = await AppUser.findByPk(id, {
+            include: [ { association: 'projects'} ]
+        });
 
         if (!user) {
             return res.status(404).json({ message: "User not found" });
